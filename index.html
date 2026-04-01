@@ -1,0 +1,251 @@
+<html lang="ar" dir="rtl"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>راديو وتلفزيون أنيس - النسخة الذكية</title>
+    <style>
+        /* إعدادات الخلفية والتصميم الغامق */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #0b1121; 
+            color: #ecf0f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* حاوية المشغل */
+        .player-container { 
+            background-color: #1e2532; 
+            padding: 40px 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            border: 1px solid #2a3441;
+        }
+
+        /* الدائرة اللي فيها اسم الراديو/القناة */
+        .logo-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4776E6, #8E54E9);
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            border: 6px solid #2c3647;
+            box-shadow: 0 0 20px rgba(71, 118, 230, 0.4);
+            transition: all 0.3s ease;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+            line-height: 1.3;
+        }
+
+        /* تنسيق القائمة المنسدلة */
+        .station-selector {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            background-color: #2a3441;
+            color: white;
+            border: 1px solid #4776E6;
+            font-size: 16px;
+            margin-bottom: 25px;
+            outline: none;
+            cursor: pointer;
+            appearance: none; 
+            -webkit-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: left 10px center; 
+        }
+
+        .station-selector optgroup {
+            background-color: #1e2532;
+            color: #a0aec0;
+            font-weight: bold;
+        }
+
+        .station-selector option {
+            background-color: #2a3441;
+            color: white;
+        }
+
+        /* تنسيق مشغل الصوت */
+        audio { 
+            width: 100%; 
+            border-radius: 30px;
+            outline: none;
+            background-color: #2a3441;
+        }
+
+        /* تنسيق شاشة الفيديو (مخفية في البداية) */
+        #videoFrame {
+            width: 100%;
+            height: 230px;
+            border-radius: 15px;
+            border: none;
+            background-color: #000;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        }
+
+        /* رسالة الحالة */
+        #statusMessage {
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 8px;
+            background: #2a3441;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="player-container">
+        
+        <div class="logo-circle" id="logoText" style="font-size: 20px; box-shadow: rgba(52, 152, 219, 0.4) 0px 0px 20px; border: 6px solid rgb(52, 152, 219);">📺  OMAR FM</div>
+        
+        <p style="color: #a0aec0; margin-bottom: 10px; font-size: 14px;">اختار البث أو المباراة</p>
+        
+        <select class="station-selector" id="stationSelect" onchange="changeStation()">
+            <option value="" disabled="" selected="">-- اضغط هنا للاختيار --</option>
+            
+            <optgroup label="🎙️ الإذاعات الأساسية">
+                <option value="https://stream.radiojar.com/8s5u5tpdtwzuv" data-type="audio">Quran FM</option>
+                <option value="https://anisfm.pp.ua/1/;" data-type="audio">راديو 1 أنيس</option>
+                <option value="https://anisfm.pp.ua/2/;" data-type="audio">راديو 2 أنيس</option>
+                <option value="https://anisfm.pp.ua/3/;" data-type="audio">راديو 3 أنيس</option>
+                <option value="https://anisfm.pp.ua/4/;" data-type="audio">راديو 4 أنيس</option>
+                <option value="https://anisfm.pp.ua/5/;" data-type="audio">راديو 5 أنيس</option>
+            </optgroup>
+
+            <optgroup label="📡 الإذاعات الإضافية (Ir &amp; Low)">
+                <option value="http://anisfm.dpdns.org/1/;" data-type="audio">راديو Ir 1 أنيس</option>
+                <option value="http://anisfm.dpdns.org/2/;" data-type="audio">راديو Ir 2 أنيس</option>
+                <option value="http://anisfm.dpdns.org/3/;" data-type="audio">راديو Ir 3 أنيس</option>
+                <option value="http://anisfm.dpdns.org/4/;" data-type="audio">راديو Ir 4 أنيس</option>
+                <option value="http://anisfm.dpdns.org/5/;" data-type="audio">راديو Ir 5 أنيس</option>
+                <option value="https://anisfm.pp.ua/1L/;" data-type="audio">راديو ضعيف 1 أنيس</option>
+                <option value="https://anisfm.pp.ua/2L/;" data-type="audio">راديو ضعيف 2 أنيس</option>
+            </optgroup>
+
+
+
+            <optgroup label="⚽ مواقع المباريات والقنوات (تفتح في صفحة جديدة)">
+                <option value="https://anis.pp.ua/" data-type="link">📺 موقع Anis FM</option>
+                <option value="https://www.sofascore.com/ar" data-type="link">مباريات اليوم ⚽️ (SofaScore)</option>
+                <option value="https://www.btolat.com/video/type/10/home" data-type="link">ملخصات مباريات ⚽️ (Btolat)</option>
+                <option value="https://www.beinsports.com/ar-mena/فيديو" data-type="link">ملخصات مباريات ⚽️ (beIN)</option>            </optgroup>
+        </select>
+
+        <audio id="audioPlayer" controls="" style="display: none;" src="https://anisfm.pp.ua/1/;"></audio>
+        
+        <iframe id="videoFrame" allow="autoplay; fullscreen" style="border: 10px solid red; display: none;" src=""></iframe>
+        
+        <div id="statusMessage" style="display: block; color: rgb(52, 152, 219);">🌐 تم فتح الموقع في صفحة جديدة.</div>
+    </div>
+
+    <script>
+        var player = document.getElementById('audioPlayer');
+        var videoFrame = document.getElementById('videoFrame');
+        var statusMsg = document.getElementById('statusMessage');
+        var logoText = document.getElementById('logoText');
+        var selector = document.getElementById('stationSelect');
+
+        function changeStation() {
+            var selectedOption = selector.options[selector.selectedIndex];
+            var streamUrl = selectedOption.value;
+            var dataType = selectedOption.getAttribute('data-type');
+            var stationName = selectedOption.text;
+            
+            // تحديث اسم الدائرة
+            if(stationName.length > 15) {
+                logoText.style.fontSize = "14px";
+            } else {
+                logoText.style.fontSize = "20px";
+            }
+            logoText.innerText = stationName;
+
+            statusMsg.style.display = 'block';
+
+            // لو اليوزر اختار "رابط موقع" (يفتح في تاب جديدة)
+            if (dataType === 'link') {
+                player.pause(); // نوقف الصوت لو شغال
+                player.style.display = 'none'; // نخفي مشغل الصوت
+                videoFrame.style.display = 'none'; // نخفي شاشة الفيديو
+                
+                window.open(streamUrl, '_blank'); // نفتح الرابط
+                
+                statusMsg.style.color = '#3498db'; 
+                statusMsg.innerHTML = '🌐 تم فتح الموقع في صفحة جديدة.';
+                logoText.style.boxShadow = "0 0 20px rgba(52, 152, 219, 0.4)";
+                logoText.style.border = "6px solid #3498db";
+                
+                // نرجع القايمة للاختيار الافتراضي عشان يقدر يختار نفس الرابط تاني لو حابب
+                selector.selectedIndex = 0; 
+            } 
+            // لو اليوزر اختار "فيديو"
+            else if (dataType === 'iframe') {
+                player.pause(); 
+                player.style.display = 'none'; 
+                
+                videoFrame.src = streamUrl; // نحط رابط الفيديو
+                videoFrame.style.display = 'block'; // نظهر شاشة الفيديو
+                
+                statusMsg.style.color = '#9b59b6'; 
+                statusMsg.innerHTML = '📺 جاري عرض الفيديو...';
+                logoText.style.boxShadow = "0 0 20px rgba(155, 89, 182, 0.4)";
+                logoText.style.border = "6px solid #9b59b6";
+            } 
+            // لو اليوزر اختار "راديو صوتي"
+            else {
+                videoFrame.src = ""; // نفضي رابط الفيديو عشان ميستهلكش نت
+                videoFrame.style.display = 'none'; // نخفي شاشة الفيديو
+                player.style.display = 'block'; // نظهر مشغل الصوت
+                
+                statusMsg.style.color = '#f1c40f'; 
+                statusMsg.innerHTML = '⏳ بيحمل...';
+                
+                player.src = streamUrl;
+                player.play().catch(function() {
+                    statusMsg.style.color = '#e74c3c'; 
+                    statusMsg.innerHTML = '❌ دوس Play للتشغيل';
+                });
+            }
+        }
+
+        // تفاعلات مشغل الصوت (بتشتغل مع الراديو بس)
+        player.onplaying = function() {
+            statusMsg.style.color = '#2ecc71'; 
+            statusMsg.innerHTML = '🎵 البث شغال دلوقتي!';
+            logoText.style.boxShadow = "0 0 30px rgba(46, 204, 113, 0.6)"; 
+            logoText.style.border = "6px solid #2ecc71";
+        };
+
+        player.onpause = function() {
+            statusMsg.style.color = '#a0aec0'; 
+            statusMsg.innerHTML = '⏸️ البث متوقف';
+            logoText.style.boxShadow = "0 0 20px rgba(71, 118, 230, 0.4)"; 
+            logoText.style.border = "6px solid #2c3647";
+        };
+
+        player.onerror = function() {
+            statusMsg.style.color = '#e74c3c';
+            statusMsg.innerHTML = '❌ البث ده قاطع من المصدر حالياً.';
+            logoText.style.border = "6px solid #e74c3c";
+        };
+    </script>
+
+
+</body></html>
