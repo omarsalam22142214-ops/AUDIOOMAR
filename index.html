@@ -1,251 +1,210 @@
 <html lang="ar" dir="rtl"><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>راديو وتلفزيون أنيس - النسخة الذكية</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Anis FM | راديو أنيس</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@400;700&amp;family=Cairo:wght@400;700&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* إعدادات الخلفية والتصميم الغامق */
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #0b1121; 
-            color: #ecf0f1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-
-        /* حاوية المشغل */
-        .player-container { 
-            background-color: #1e2532; 
-            padding: 40px 30px; 
-            border-radius: 20px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
-            text-align: center;
-            max-width: 420px;
-            width: 100%;
-            border: 1px solid #2a3441;
-        }
-
-        /* الدائرة اللي فيها اسم الراديو/القناة */
-        .logo-circle {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4776E6, #8E54E9);
-            margin: 0 auto 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            font-weight: bold;
-            border: 6px solid #2c3647;
-            box-shadow: 0 0 20px rgba(71, 118, 230, 0.4);
-            transition: all 0.3s ease;
-            text-align: center;
-            padding: 10px;
-            box-sizing: border-box;
-            line-height: 1.3;
-        }
-
-        /* تنسيق القائمة المنسدلة */
-        .station-selector {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 10px;
-            background-color: #2a3441;
-            color: white;
-            border: 1px solid #4776E6;
-            font-size: 16px;
-            margin-bottom: 25px;
-            outline: none;
-            cursor: pointer;
-            appearance: none; 
+        body { font-family: 'Cairo', sans-serif; background-color: #0b1121; }
+        .font-display { font-family: 'Cairo Play', sans-serif; }
+        
+        /* تنسيق شريط الصوت */
+        input[type=range] {
             -webkit-appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: left 10px center; 
+            background: transparent;
         }
-
-        .station-selector optgroup {
-            background-color: #1e2532;
-            color: #a0aec0;
-            font-weight: bold;
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 14px; width: 14px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            cursor: pointer;
+            margin-top: -5px;
         }
-
-        .station-selector option {
-            background-color: #2a3441;
-            color: white;
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
         }
-
-        /* تنسيق مشغل الصوت */
-        audio { 
-            width: 100%; 
-            border-radius: 30px;
-            outline: none;
-            background-color: #2a3441;
+        
+        /* حركة دوران اللوجو */
+        .spin-anim {
+            animation: spin 8s linear infinite;
         }
-
-        /* تنسيق شاشة الفيديو (مخفية في البداية) */
-        #videoFrame {
-            width: 100%;
-            height: 230px;
-            border-radius: 15px;
-            border: none;
-            background-color: #000;
-            display: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-        }
-
-        /* رسالة الحالة */
-        #statusMessage {
-            margin-top: 20px;
-            font-size: 14px;
-            font-weight: bold;
-            padding: 10px;
-            border-radius: 8px;
-            background: #2a3441;
-            display: none;
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
-</head>
-<body>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.absolute{position:absolute}.relative{position:relative}.left-4{left:1rem}.top-\[42px\]{top:42px}.mx-0\.5{margin-left:0.125rem;margin-right:0.125rem}.mx-3{margin-left:0.75rem;margin-right:0.75rem}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-1{margin-left:0.25rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-16{height:4rem}.h-32{height:8rem}.h-screen{height:100vh}.w-16{width:4rem}.w-32{width:8rem}.w-full{width:100%}.max-w-\[220px\]{max-width:220px}.max-w-\[400px\]{max-width:400px}.flex-1{flex:1 1 0%}.select-none{-webkit-user-select:none;user-select:none}.appearance-none{-webkit-appearance:none;appearance:none}.grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.flex-row{flex-direction:row}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.overflow-hidden{overflow:hidden}.rounded-2xl{border-radius:1rem}.rounded-\[24px\]{border-radius:24px}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-\[3px\]{border-width:3px}.border-\[\#4776E6\]\/50{border-color:rgb(71 118 230 / 0.5)}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.border-white\/10{border-color:rgb(255 255 255 / 0.1)}.border-white\/5{border-color:rgb(255 255 255 / 0.05)}.bg-\[\#1e2330\]\/95{background-color:rgb(30 35 48 / 0.95)}.bg-\[\#1e293b\]{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-black\/20{background-color:rgb(0 0 0 / 0.2)}.bg-transparent{background-color:transparent}.bg-white\/10{background-color:rgb(255 255 255 / 0.1)}.bg-white\/5{background-color:rgb(255 255 255 / 0.05)}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.from-blue-500{--tw-gradient-from:#3b82f6 var(--tw-gradient-from-position);--tw-gradient-to:rgb(59 130 246 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-purple-600{--tw-gradient-to:#9333ea var(--tw-gradient-to-position)}.p-1\.5{padding:0.375rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-10{padding-left:2.5rem;padding-right:2.5rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.pb-2{padding-bottom:0.5rem}.pt-6{padding-top:1.5rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[13px\]{font-size:13px}.text-sm{font-size:0.875rem;line-height:1.25rem}.font-bold{font-weight:700}.tracking-wider{letter-spacing:0.05em}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-white\/40{color:rgb(255 255 255 / 0.4)}.text-white\/50{color:rgb(255 255 255 / 0.5)}.text-white\/70{color:rgb(255 255 255 / 0.7)}.text-yellow-400{--tw-text-opacity:1;color:rgb(250 204 21 / var(--tw-text-opacity, 1))}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_30px_rgba\(71\2c 118\2c 230\2c 0\.3\)\]{--tw-shadow:0 0 30px rgba(71,118,230,0.3);--tw-shadow-colored:0 0 30px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.drop-shadow-md{--tw-drop-shadow:drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-200{transition-duration:200ms}.duration-500{transition-duration:500ms}.hover\:bg-white\/10:hover{background-color:rgb(255 255 255 / 0.1)}.hover\:bg-white\/5:hover{background-color:rgb(255 255 255 / 0.05)}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.focus\:border-blue-500\/50:focus{border-color:rgb(59 130 246 / 0.5)}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}</style></head>
+<body class="text-white h-screen flex flex-col items-center justify-center p-4 select-none">
 
-    <div class="player-container">
+    <div class="w-full max-w-[400px] bg-[#1e2330]/95 backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/10 overflow-hidden flex flex-col">
         
-        <div class="logo-circle" id="logoText" style="font-size: 20px; box-shadow: rgba(52, 152, 219, 0.4) 0px 0px 20px; border: 6px solid rgb(52, 152, 219);">📺  OMAR FM</div>
-        
-        <p style="color: #a0aec0; margin-bottom: 10px; font-size: 14px;">اختار البث أو المباراة</p>
-        
-        <select class="station-selector" id="stationSelect" onchange="changeStation()">
-            <option value="" disabled="" selected="">-- اضغط هنا للاختيار --</option>
+        <div class="flex justify-center items-center pt-6 pb-2">
+            <div class="flex flex-row items-center justify-center gap-2 px-6 py-2 rounded-xl border bg-black/20 border-white/10">
+                <h1 class="font-display text-sm font-bold text-white">راديو عمر</h1>
+                <span class="text-blue-500 font-bold mx-0.5">|</span>
+                <h1 class="font-display text-sm font-bold text-white">OMAR FM</h1>
+            </div>
+        </div>
+
+        <div class="flex-1 flex flex-col items-center p-6">
             
-            <optgroup label="🎙️ الإذاعات الأساسية">
-                <option value="https://stream.radiojar.com/8s5u5tpdtwzuv" data-type="audio">Quran FM</option>
-                <option value="https://anisfm.pp.ua/1/;" data-type="audio">راديو 1 أنيس</option>
-                <option value="https://anisfm.pp.ua/2/;" data-type="audio">راديو 2 أنيس</option>
-                <option value="https://anisfm.pp.ua/3/;" data-type="audio">راديو 3 أنيس</option>
-                <option value="https://anisfm.pp.ua/4/;" data-type="audio">راديو 4 أنيس</option>
-                <option value="https://anisfm.pp.ua/5/;" data-type="audio">راديو 5 أنيس</option>
-            </optgroup>
+            <div class="relative w-32 h-32 rounded-full overflow-hidden shadow-[0_0_30px_rgba(71,118,230,0.3)] border-[3px] border-[#4776E6]/50 mb-8 flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 transition-all duration-500" id="logoContainer">
+                <span class="font-display font-bold text-2xl drop-shadow-md tracking-wider">OMAR FM</span>
+            </div>
 
-            <optgroup label="📡 الإذاعات الإضافية (Ir &amp; Low)">
-                <option value="http://anisfm.dpdns.org/1/;" data-type="audio">راديو Ir 1 أنيس</option>
-                <option value="http://anisfm.dpdns.org/2/;" data-type="audio">راديو Ir 2 أنيس</option>
-                <option value="http://anisfm.dpdns.org/3/;" data-type="audio">راديو Ir 3 أنيس</option>
-                <option value="http://anisfm.dpdns.org/4/;" data-type="audio">راديو Ir 4 أنيس</option>
-                <option value="http://anisfm.dpdns.org/5/;" data-type="audio">راديو Ir 5 أنيس</option>
-                <option value="https://anisfm.pp.ua/1L/;" data-type="audio">راديو ضعيف 1 أنيس</option>
-                <option value="https://anisfm.pp.ua/2L/;" data-type="audio">راديو ضعيف 2 أنيس</option>
-            </optgroup>
+            <button id="playBtn" onclick="togglePlay()" class="w-16 h-16 rounded-full flex items-center justify-center shadow-xl transition-all duration-200 active:scale-95 border-[3px] bg-transparent text-white border-white hover:bg-white/10 mb-8">
+                <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="hidden"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+            </button>
 
+            <div class="flex items-center gap-3 w-full max-w-[220px] mb-6">
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.7" oninput="changeVolume()" class="w-full flex-1" dir="ltr" style="background: linear-gradient(to right, rgb(59, 130, 246) 100%, rgba(255, 255, 255, 0.2) 100%);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white/70"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            </div>
 
+            <div class="w-full relative mt-2">
+                <label class="block text-center text-[11px] font-bold mb-2 text-white/50">اختر الإذاعة</label>
+                <select id="stationSelect" onchange="changeStation()" class="w-full appearance-none py-3.5 px-10 rounded-xl text-center font-bold text-sm outline-none transition-all shadow-sm border bg-[#1e293b] text-white border-white/10 focus:border-blue-500/50" dir="rtl">
+                    <optgroup label="القرآن الكريم">
+                        <option value="https://stream.radiojar.com/8s5u5tpdtwzuv">Quran FM</option>
+                    </optgroup>
+                    <optgroup label="إذاعات أنيس الأساسية">
+                        <option value="https://cdn.anisfm.pp.ua/listen/anis_fm/1M">أنيس ١</option>
+                        <option value="https://cdn.anisfm.pp.ua/listen/anis_fm/1L">أنيس ١ (نت ضعيف)</option>
+                        <option value="https://cdn.anisfm.pp.ua/listen/anis_fm_2/2M">أنيس ٢</option>
+                        <option value="https://cdn.anisfm.pp.ua/listen/anis_fm_2/2L">أنيس ٢ (نت ضعيف)</option>
+                        <option value="https://cdn.anisfm.pp.ua/listen/anis_fm_3/3M">أنيس ٣</option>
+                        <option value="https://cdn.anisfm.pp.ua/listen/anis_fm_3/3L">أنيس ٣ (نت ضعيف)</option>
+                        <option value="https://cdn.anisfm.pp.ua/listen/anis_fm_4/4M">أنيس ٤</option>
+                        <option value="https://cdn.anisfm.pp.ua/listen/anis_fm_4/4L">أنيس ٤ (نت ضعيف)</option>
+                        <option value="https://cdn.anisfm.pp.ua/listen/anis_fm_5/5M">أنيس ٥</option>
+                        <option value="https://cdn.anisfm.pp.ua/listen/anis_fm_5/5L">أنيس ٥ (نت ضعيف)</option>
+                        <option value="https://stream-176.zeno.fm/qejhjl9xcrouv">اذاعة أحمد يحيى</option>
+                    </optgroup>
+                    
+                    <optgroup label="إذاعات عمر جبر (Omar Gbr)">
+                        <option value="http://tv.omargbr.shop:8000/omar1">omargadr1</option>
+                        <option value="http://tv.omargbr.shop:8000/omar2">omargadr2</option>
+                        <option value="http://tv.omargbr.shop:8000/omar3">omargadr3</option>
+                        <option value="http://tv.omargbr.shop:8000/omar4">omargadr4</option>
+                        <option value="http://tv.omargbr.shop:8000/omar5">omargadr5</option>
+                        <option value="https://tv.omargbr.shop/1/omar">omargadr6 (HTTPS)</option>
+                        <option value="https://tv.omargbr.shop/2/omar">omargadr7 (HTTPS)</option>
+                        <option value="https://tv.omargbr.shop/3/omar">omargadr8 (HTTPS)</option>
+                        <option value="https://tv.omargbr.shop/4/omar">omargadr9 (HTTPS)</option>
+                        <option value="https://tv.omargbr.shop/5/omar">omargad10 (HTTPS)</option>
+                    </optgroup>
+                </select>
+                <div class="absolute left-4 top-[42px] pointer-events-none text-white/40">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"></path></svg>
+                </div>
+            </div>
+            
+            <div id="statusMessage" class="mt-4 text-[13px] font-bold text-yellow-400 hidden flex items-center gap-1">
+                <span>⏳</span> جاري التحميل...
+            </div>
+        </div>
 
-            <optgroup label="⚽ مواقع المباريات والقنوات (تفتح في صفحة جديدة)">
-                <option value="https://anis.pp.ua/" data-type="link">📺 موقع Anis FM</option>
-                <option value="https://www.sofascore.com/ar" data-type="link">مباريات اليوم ⚽️ (SofaScore)</option>
-                <option value="https://www.btolat.com/video/type/10/home" data-type="link">ملخصات مباريات ⚽️ (Btolat)</option>
-                <option value="https://www.beinsports.com/ar-mena/فيديو" data-type="link">ملخصات مباريات ⚽️ (beIN)</option>            </optgroup>
-        </select>
+        <div class="grid grid-cols-4 gap-1 p-1.5 mx-3 mb-3 rounded-2xl bg-white/5 border border-white/5">
+            <button class="flex flex-col items-center py-2.5 rounded-xl text-white/50 hover:text-white hover:bg-white/5 transition-all"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-1"><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><span class="text-[10px] font-bold">الجدول</span></button>
+            <button class="flex flex-col items-center py-2.5 rounded-xl bg-white/10 text-white shadow-inner"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-1"><circle cx="12" cy="12" r="2"></circle><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"></path><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19M4.9 19.1C1 15.2 1 8.8 4.9 4.9"></path></svg><span class="text-[10px] font-bold">الراديو</span></button>
+            <button class="flex flex-col items-center py-2.5 rounded-xl text-white/50 hover:text-white hover:bg-white/5 transition-all"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-1"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span class="text-[10px] font-bold">القرآن</span></button>
+            <button class="flex flex-col items-center py-2.5 rounded-xl text-white/50 hover:text-white hover:bg-white/5 transition-all"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mb-1"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg><span class="text-[10px] font-bold">الروابط</span></button>
+        </div>
 
-        <audio id="audioPlayer" controls="" style="display: none;" src="https://anisfm.pp.ua/1/;"></audio>
-        
-        <iframe id="videoFrame" allow="autoplay; fullscreen" style="border: 10px solid red; display: none;" src=""></iframe>
-        
-        <div id="statusMessage" style="display: block; color: rgb(52, 152, 219);">🌐 تم فتح الموقع في صفحة جديدة.</div>
+        <audio id="audioPlayer" src="https://cdn.anisfm.pp.ua/listen/anis_fm/1M"></audio>
     </div>
 
     <script>
-        var player = document.getElementById('audioPlayer');
-        var videoFrame = document.getElementById('videoFrame');
-        var statusMsg = document.getElementById('statusMessage');
-        var logoText = document.getElementById('logoText');
-        var selector = document.getElementById('stationSelect');
+        const player = document.getElementById('audioPlayer');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const logoContainer = document.getElementById('logoContainer');
+        const selector = document.getElementById('stationSelect');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const statusMsg = document.getElementById('statusMessage');
 
-        function changeStation() {
-            var selectedOption = selector.options[selector.selectedIndex];
-            var streamUrl = selectedOption.value;
-            var dataType = selectedOption.getAttribute('data-type');
-            var stationName = selectedOption.text;
-            
-            // تحديث اسم الدائرة
-            if(stationName.length > 15) {
-                logoText.style.fontSize = "14px";
-            } else {
-                logoText.style.fontSize = "20px";
-            }
-            logoText.innerText = stationName;
+        // أول ما الصفحة تفتح
+        player.src = selector.value;
+        player.volume = volumeSlider.value;
 
-            statusMsg.style.display = 'block';
-
-            // لو اليوزر اختار "رابط موقع" (يفتح في تاب جديدة)
-            if (dataType === 'link') {
-                player.pause(); // نوقف الصوت لو شغال
-                player.style.display = 'none'; // نخفي مشغل الصوت
-                videoFrame.style.display = 'none'; // نخفي شاشة الفيديو
+        // دالة التشغيل والإيقاف
+        function togglePlay() {
+            if (player.paused) {
+                if(!player.src || player.src === window.location.href) {
+                    player.src = selector.value;
+                }
                 
-                window.open(streamUrl, '_blank'); // نفتح الرابط
+                statusMsg.classList.remove('hidden');
+                statusMsg.innerHTML = '<span>⏳</span> جاري التحميل...';
+                statusMsg.className = "mt-4 text-[13px] font-bold text-yellow-400 flex items-center gap-1";
                 
-                statusMsg.style.color = '#3498db'; 
-                statusMsg.innerHTML = '🌐 تم فتح الموقع في صفحة جديدة.';
-                logoText.style.boxShadow = "0 0 20px rgba(52, 152, 219, 0.4)";
-                logoText.style.border = "6px solid #3498db";
-                
-                // نرجع القايمة للاختيار الافتراضي عشان يقدر يختار نفس الرابط تاني لو حابب
-                selector.selectedIndex = 0; 
-            } 
-            // لو اليوزر اختار "فيديو"
-            else if (dataType === 'iframe') {
-                player.pause(); 
-                player.style.display = 'none'; 
-                
-                videoFrame.src = streamUrl; // نحط رابط الفيديو
-                videoFrame.style.display = 'block'; // نظهر شاشة الفيديو
-                
-                statusMsg.style.color = '#9b59b6'; 
-                statusMsg.innerHTML = '📺 جاري عرض الفيديو...';
-                logoText.style.boxShadow = "0 0 20px rgba(155, 89, 182, 0.4)";
-                logoText.style.border = "6px solid #9b59b6";
-            } 
-            // لو اليوزر اختار "راديو صوتي"
-            else {
-                videoFrame.src = ""; // نفضي رابط الفيديو عشان ميستهلكش نت
-                videoFrame.style.display = 'none'; // نخفي شاشة الفيديو
-                player.style.display = 'block'; // نظهر مشغل الصوت
-                
-                statusMsg.style.color = '#f1c40f'; 
-                statusMsg.innerHTML = '⏳ بيحمل...';
-                
-                player.src = streamUrl;
-                player.play().catch(function() {
-                    statusMsg.style.color = '#e74c3c'; 
-                    statusMsg.innerHTML = '❌ دوس Play للتشغيل';
+                player.play().catch(e => {
+                    console.error(e);
+                    statusMsg.innerHTML = '<span>❌</span> فشل التشغيل (حاول مرة تانية)';
+                    statusMsg.className = "mt-4 text-[13px] font-bold text-red-500 flex items-center gap-1";
+                    
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
                 });
+            } else {
+                player.pause();
             }
         }
 
-        // تفاعلات مشغل الصوت (بتشتغل مع الراديو بس)
-        player.onplaying = function() {
-            statusMsg.style.color = '#2ecc71'; 
-            statusMsg.innerHTML = '🎵 البث شغال دلوقتي!';
-            logoText.style.boxShadow = "0 0 30px rgba(46, 204, 113, 0.6)"; 
-            logoText.style.border = "6px solid #2ecc71";
-        };
+        // لما تغير الإذاعة
+        function changeStation() {
+            player.src = selector.value;
+            if (!player.paused) {
+                statusMsg.innerHTML = '<span>⏳</span> جاري التحميل...';
+                statusMsg.className = "mt-4 text-[13px] font-bold text-yellow-400 flex items-center gap-1";
+                player.play().catch(e => console.error(e));
+            }
+        }
 
-        player.onpause = function() {
-            statusMsg.style.color = '#a0aec0'; 
-            statusMsg.innerHTML = '⏸️ البث متوقف';
-            logoText.style.boxShadow = "0 0 20px rgba(71, 118, 230, 0.4)"; 
-            logoText.style.border = "6px solid #2c3647";
-        };
+        // التحكم في الصوت
+        function changeVolume() {
+            player.volume = volumeSlider.value;
+            volumeSlider.style.background = `linear-gradient(to right, #3b82f6 ${volumeSlider.value * 100}%, rgba(255,255,255,0.2) ${volumeSlider.value * 100}%)`;
+        }
+        changeVolume();
 
-        player.onerror = function() {
-            statusMsg.style.color = '#e74c3c';
-            statusMsg.innerHTML = '❌ البث ده قاطع من المصدر حالياً.';
-            logoText.style.border = "6px solid #e74c3c";
-        };
+        // إيفينت: لما الصوت يشتغل
+        player.addEventListener('playing', function() {
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+            logoContainer.classList.add('spin-anim');
+            logoContainer.style.borderColor = "#3b82f6";
+            statusMsg.innerHTML = '<span>🎵</span> البث شغال';
+            statusMsg.className = "mt-4 text-[13px] font-bold text-green-400 flex items-center gap-1";
+        });
+
+        // إيفينت: لما الصوت يقف
+        player.addEventListener('pause', function() {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            logoContainer.classList.remove('spin-anim');
+            logoContainer.style.borderColor = "rgba(71,118,230,0.5)";
+            statusMsg.innerHTML = '<span>⏸️</span> البث متوقف';
+            statusMsg.className = "mt-4 text-[13px] font-bold text-white/50 flex items-center gap-1";
+        });
+        
+        // إيفينت: التحميل
+        player.addEventListener('waiting', function() {
+            statusMsg.innerHTML = '<span>⏳</span> بيحمل...';
+            statusMsg.className = "mt-4 text-[13px] font-bold text-yellow-400 flex items-center gap-1";
+        });
+
+        // إيفينت: الخطأ
+        player.addEventListener('error', function() {
+            statusMsg.innerHTML = '<span>❌</span> البث قاطع من المصدر';
+            statusMsg.className = "mt-4 text-[13px] font-bold text-red-500 flex items-center gap-1";
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            logoContainer.classList.remove('spin-anim');
+        });
     </script>
-
 
 </body></html>
